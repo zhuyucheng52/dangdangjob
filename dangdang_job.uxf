@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1395</x>
+      <y>297</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ElasticJob</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1017</x>
+      <y>423</y>
+      <w>324</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+DataflowJob
+--
+/fetchData(ShardingContexts) : List&lt;T&gt;/
+/processData(ShardingContexts, List&lt;T&gt;) : void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1395</x>
+      <y>423</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ScriptJob</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1593</x>
+      <y>423</y>
+      <w>234</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+SimpleJob
+--
+/execute(ShardingContexts) : void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1872</x>
+      <y>441</y>
+      <w>315</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ExecutorServiceHandler
+--
+/createExecutorService() : ExecutorService/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1872</x>
+      <y>549</y>
+      <w>315</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>DefaultExecutorServiceHandler
+--
++createExecutorService() : ExecutorService</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1026</x>
+      <y>0</y>
+      <w>405</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+JobFacade
+--
+/loadJobRootConfiguration(boolean) : JobRootConfiguration/
+/checkJobExecutionEnvironment() : void/
+/failoverIfNecessary() : void/
+/registerJobBegin(ShardingContexts) : void/
+/registerJobCompleted(ShardingContexts) : void/
+/getShardingContexts() : ShardingContexts/
+/misfireIfNecessary(Collection&lt;Integer&gt;) : boolean/
+/clearMisfire(Collection&lt;Integer&gt;) : void/
+/isExecuteMisfired(Collection&lt;Integer&gt;) : boolean/
+/isEligibleForJobRunning() : boolean/
+/isNeedSharding() : boolean/
+/cleanPreviousExecutionInfo() : void/
+/beforeJobExecuted(ShardingContexts) : void/
+/afterJobExecuted(ShardingContexts) : void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1332</x>
+      <y>549</y>
+      <w>234</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+AbstractElasticJobExecutor
+--
+-jobFacade : JobFacade
+-executorService : ExecutorService
+--
++execute() : void
+/#process(ShardingContexts) : void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1224</x>
+      <y>936</y>
+      <w>450</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>JobExecutorFactory
+--
+getJobExecutor(ElasticJob, JobFacade) : AbstractElasticJobExecutor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1701</x>
+      <y>747</y>
+      <w>288</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>SimpleJobExecutor
+--
+-simpleJob : SimpleJob
+--
++ScriptJobExecutor(ShardingContext)
+#process(ShardingContexts) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1422</x>
+      <y>630</y>
+      <w>440</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;81;423;81;423;117</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>954</x>
+      <y>747</y>
+      <w>378</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>DataflowJobExecutor
+--
+-dataflowJob : DataflowJob
+--
++DataflowJobExecutor(DataflowJob&lt;Object&gt;, JobFacade)
+#process(ShardingContexts) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1071</x>
+      <y>630</y>
+      <w>395</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>378;27;378;81;27;81;27;117</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1386</x>
+      <y>747</y>
+      <w>261</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>ScriptJobExecutor
+--
+-executor : Executor
+--
++ScriptJobExecutor(JobFacade)
+#process(ShardingContexts) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1422</x>
+      <y>630</y>
+      <w>116</w>
+      <h>134</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;81;99;81;99;117</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1080</x>
+      <y>801</y>
+      <w>404</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;90;387;90;387;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1440</x>
+      <y>801</y>
+      <w>89</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>72;27;72;90;27;90;27;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1440</x>
+      <y>801</y>
+      <w>422</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>405;27;405;90;27;90;27;135</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1692</x>
+      <y>459</y>
+      <w>134</w>
+      <h>305</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;153;117;153;117;288</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1107</x>
+      <y>477</y>
+      <w>44</w>
+      <h>287</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;270</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>801</x>
+      <y>675</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Executor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>801</x>
+      <y>774</y>
+      <w>135</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>DefaultExecutor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>909</x>
+      <y>666</y>
+      <w>521</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;81;27;504;27;504;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1341</x>
+      <y>234</y>
+      <w>44</w>
+      <h>332</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;315</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1539</x>
+      <y>540</y>
+      <w>350</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>333;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>252</x>
+      <y>288</y>
+      <w>162</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+JobEvent
+--
+/getJobName() : String/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>423</y>
+      <w>315</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>JobExecutionEvent
+--
+JobExecutionEvent(String, ExecutionSource, int)
+executionSuccess() : void
+executionFailure() : void
+getFailureCause() : String
+getId() : String
+getHostname() : String
+getJobName() : String
+getSource() : String
+getShardingItem() : int
+getStartTime() : Date
+getCompleteTime() : Date
+isSuccess() : boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>333</x>
+      <y>423</y>
+      <w>342</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>JobTraceEvent
+--
+JobTraceEvent(String, LogLevel, String, Throwable)
+JobTraceEvent(String, LogLevel, String)
+getFailureCause() : String
+getJobName() : String
+getLogLevel() : String
+getMessage() : String
+getHostname() : String
+getCreationTime() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>558</x>
+      <y>270</y>
+      <w>396</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>JobEventBus
+--
++getInstance() : JobEventBus
++register(String, Collection&lt;JobEventConfiguration&gt;) : void
++post(JobEvent) : void
++clearListeners(String) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>288</y>
+      <w>188</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>27;27;171;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>558</x>
+      <y>135</y>
+      <w>396</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>JobEventBusInstance
+--
+-eventBus : EventBus
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>720</x>
+      <y>171</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>27;99;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1431</x>
+      <y>315</y>
+      <w>44</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;108</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1152</x>
+      <y>315</y>
+      <w>323</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>306;27;306;63;27;63;27;108</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1431</x>
+      <y>315</y>
+      <w>296</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;63;279;63;279;108</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1062</x>
+      <y>54</y>
+      <w>170</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;135;27;153;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>2007</x>
+      <y>477</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>837</x>
+      <y>693</y>
+      <w>44</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>306</x>
+      <y>324</y>
+      <w>224</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>27;27;27;63;207;63;207;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>126</x>
+      <y>324</y>
+      <w>224</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>207;27;207;63;27;63;27;99</additional_attributes>
+  </element>
+</diagram>
